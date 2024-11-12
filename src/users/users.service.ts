@@ -23,6 +23,21 @@ export class UsersService {
     return this.userModel.findById(id);
   }
 
+  async findLogin(email: string, password: string) {
+    return await this.userModel
+      .find()
+      .then((data) => {
+        const findItem = data.find(
+          (item) => item.email === email && item.password && password
+        );
+
+        return findItem;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   update(id: string, updateUserDto: UpdateUserDto) {
     return this.userModel.findByIdAndUpdate(
       {
