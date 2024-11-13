@@ -2,6 +2,7 @@ import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { UsersService } from "../users/users.service";
 import { User } from "src/users/entities/user.entity";
 import { Document, Types } from "mongoose";
+import { JwtService } from "@nestjs/jwt";
 
 export interface UsersProps {
   name: string;
@@ -22,9 +23,12 @@ type UserModel = Document<unknown, {}, UserDocument> &
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly userService: UsersService) {} // Ensure UsersService is injected here
+  constructor(
+    private readonly userService: UsersService,
+    private jwtService: JwtService
+  ) {}
 
-  async signIn(email: string, pass: string): Promise<any> {
+  async signIn(email: string, pass: string): Promise<{ access_token: string }> {
     const user: any = await this.userService.findLogin(email, pass);
 
     if (user?.email !== email) {
@@ -35,6 +39,10 @@ export class AuthService {
       throw new UnauthorizedException();
     }
 
-    return user;
+    const payload = { email: user.email, password: user.password };
+
+    return {
+      access_token: await this.jwtService.signAsync(payload),
+    };
   }
 }
