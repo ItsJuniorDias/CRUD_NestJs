@@ -1,7 +1,5 @@
 import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { UsersService } from "../users/users.service";
-import { User } from "src/users/entities/user.entity";
-import { Document, Types } from "mongoose";
 import { JwtService } from "@nestjs/jwt";
 
 export interface UsersProps {
@@ -9,17 +7,6 @@ export interface UsersProps {
   email: string;
   password: string;
 }
-
-interface UserDocument extends User, Document {
-  _id: Types.ObjectId;
-  __v: number;
-}
-
-type UserModel = Document<unknown, {}, UserDocument> &
-  User & {
-    _id: Types.ObjectId;
-    __v: number;
-  };
 
 @Injectable()
 export class AuthService {
