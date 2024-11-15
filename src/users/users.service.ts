@@ -1,13 +1,17 @@
-import { Injectable } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
-import { InjectModel } from '@nestjs/mongoose';
-import { User, UserDocument } from './entities/user.entity';
-import { Model } from 'mongoose';
+import { Injectable } from "@nestjs/common";
+import { CreateUserDto } from "./dto/create-user.dto";
+import { UpdateUserDto } from "./dto/update-user.dto";
+import { InjectModel } from "@nestjs/mongoose";
+import { User, UserDocument } from "./entities/user.entity";
+import { Model } from "mongoose";
+import { ConfigService } from "@nestjs/config";
 
 @Injectable()
 export class UsersService {
-  constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
+  constructor(
+    @InjectModel(User.name) private userModel: Model<UserDocument>,
+    private configService: ConfigService
+  ) {}
 
   create(createUserDto: CreateUserDto) {
     const user = new this.userModel(createUserDto);
@@ -28,7 +32,7 @@ export class UsersService {
       .find()
       .then((data) => {
         const findItem = data.find(
-          (item) => item.email === email && item.password && password,
+          (item) => item.email === email && item.password && password
         );
 
         return findItem;
@@ -48,8 +52,16 @@ export class UsersService {
       },
       {
         new: true,
-      },
+      }
     );
+  }
+
+  getEmail(): string {
+    return this.configService.get<string>("USER_EMAIL");
+  }
+
+  getSecretKey(): string {
+    return this.configService.get<string>("SECRET_KEY");
   }
 
   remove(id: string) {
