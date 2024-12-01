@@ -48,6 +48,7 @@ describe("UserController", () => {
     usersService.create({
       email: "milenamartim@live.com",
       name: "Milena Martim",
+      age: 27,
       password: "123467",
     });
 
