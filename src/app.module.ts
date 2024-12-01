@@ -1,13 +1,13 @@
-import { Module } from '@nestjs/common';
-import { UsersModule } from './users/users.module';
-import { MongooseModule } from '@nestjs/mongoose';
-import { AuthModule } from './auth/auth.module';
-import { UploadModule } from './upload/upload.module';
+import { Module } from "@nestjs/common";
+import { UsersModule } from "./users/users.module";
+import { MongooseModule } from "@nestjs/mongoose";
+import { AuthModule } from "./auth/auth.module";
+import { UploadModule } from "./upload/upload.module";
 
 @Module({
   imports: [
     MongooseModule.forRoot(
-      'mongodb+srv://reabilitado97:DDFYDBjwEtAg9LTT@cluster0.gulwx.mongodb.net/',
+      "mongodb+srv://juniordias:4xnayCrhXmy6XEor@cluster0.b7w3c.mongodb.net/"
     ),
     UsersModule,
     AuthModule,
