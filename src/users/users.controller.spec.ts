@@ -50,6 +50,7 @@ describe("UserController", () => {
       name: "Milena Martim",
       age: 27,
       password: "123467",
+      product: [],
     });
 
     expect(usersService.create).toHaveBeenCalled();

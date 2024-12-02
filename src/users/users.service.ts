@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UpdateUserDto } from "./dto/update-user.dto";
 import { InjectModel } from "@nestjs/mongoose";
@@ -20,7 +20,9 @@ export class UsersService {
   }
 
   findOne(id: string) {
-    return this.userModel.findById(id);
+    const user = this.userModel.findById(id);
+
+    return user;
   }
 
   async findLogin(email: string, password: string) {

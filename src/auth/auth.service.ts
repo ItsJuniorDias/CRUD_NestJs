@@ -1,7 +1,7 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { UsersService } from '../users/users.service';
-import { JwtService } from '@nestjs/jwt';
-import { AuthDto } from './dtos/auth-user.dto';
+import { Injectable, UnauthorizedException } from "@nestjs/common";
+import { UsersService } from "../users/users.service";
+import { JwtService } from "@nestjs/jwt";
+import { AuthDto } from "./dtos/auth-user.dto";
 
 export interface UsersProps {
   name: string;
@@ -13,7 +13,7 @@ export interface UsersProps {
 export class AuthService {
   constructor(
     private readonly userService: UsersService,
-    private jwtService: JwtService,
+    private jwtService: JwtService
   ) {}
 
   async signIn(email: string, pass: string): Promise<{ access_token: string }> {
