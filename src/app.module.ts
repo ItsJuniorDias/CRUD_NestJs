@@ -1,9 +1,12 @@
 import { Module } from "@nestjs/common";
+import { ConfigModule } from "@nestjs/config";
 import { UsersModule } from "./users/users.module";
 import { MongooseModule } from "@nestjs/mongoose";
 import { AuthModule } from "./auth/auth.module";
 import { UploadModule } from "./upload/upload.module";
-import { ProductsModule } from './products/products.module';
+import { ProductsModule } from "./products/products.module";
+
+import { CheckoutModule } from "./checkout/checkout.module";
 
 @Module({
   imports: [
@@ -14,6 +17,8 @@ import { ProductsModule } from './products/products.module';
     AuthModule,
     UploadModule,
     ProductsModule,
+    ConfigModule.forRoot({ isGlobal: true }),
+    CheckoutModule,
   ],
   controllers: [],
   providers: [],
