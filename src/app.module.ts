@@ -7,6 +7,7 @@ import { UploadModule } from "./upload/upload.module";
 import { ProductsModule } from "./products/products.module";
 
 import { CheckoutModule } from "./checkout/checkout.module";
+import { NotificationsModule } from "./notifications/notifications.module";
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { CheckoutModule } from "./checkout/checkout.module";
     ProductsModule,
     ConfigModule.forRoot({ isGlobal: true }),
     CheckoutModule,
+    NotificationsModule,
   ],
   controllers: [],
   providers: [],
